@@ -25,24 +25,33 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <link src="./style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
     <title>Mongoose Scrapper</title>
   </head>
   <body>
-    <div class="container-fluid p-0">
-      <nav class="navbar navbar-expand-md bg-success sticky-top">
-        <div class="collapse navbar-collapse" id="navbarDropdown">
-          <ul class="nav navbar-nav w-100 d-flex justify-content-around">
-            <li class="nav-item"><a class="nav-link text-light" href="#home">HOME</a></li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#savedArticles">Saved Articles</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-danger" href="#ScrapeArticles">Scrape Articles</a>
-            </li>
-          </ul>
+    <div class="container-fluid">
+      <div class="row p-0">
+        <div class="column col-12">
+          <nav class="navbar navbar-expand-md bg-success fixed-top">
+            <div class="collapse navbar-collapse" id="navbarDropdown">
+              <ul class="nav navbar-nav w-100 d-flex justify-content-around">
+                <li class="nav-item"><a class="nav-link text-light" href="#home">HOME</a></li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#savedArticles">Saved Articles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-danger" href="#ScrapeArticles">Scrape Articles</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
-      </nav>
+      </div>
+      <div class="row bgimg p-0">
+        <div class="column col-12 d-flex justify-content-center align-items-center">
+          <p class="headline">News Scrapper</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

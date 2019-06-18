@@ -1,0 +1,22 @@
+.bgimg {
+  background-image: url("../images/black-and-white-data-folded.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.headline {
+  font-size: 4rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-weight: bolder;
+  letter-spacing: 0.2rem;
+  text-shadow: 1px 1px 1px rgb(241, 236, 236);
+}
