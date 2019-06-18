@@ -1,23 +1,25 @@
-let db = require("./models");
+let db = require("../models");
 
-app.get("/", (req, res) => {
-  response.send("Hello Wold");
-});
+module.exports = app => {
+  app.get("/", (req, res) => {
+    response.send("Hello Wold");
+  });
 
-app.get("/scrape", (req, res) => {
-  axios
-    .get("https://www.nytimes.com/")
-    .then(results => {
-      // console.log(results.data);
-      // res.send(results.data);
-      let $ = cheerio.load(results.data);
+  app.get("/scrape", (req, res) => {
+    axios
+      .get("https://www.nytimes.com/")
+      .then(results => {
+        // console.log(results.data);
+        // res.send(results.data);
+        let $ = cheerio.load(results.data);
 
-      $("article").each((i, element) => {
-        console.log(element);
+        $("article").each((i, element) => {
+          console.log(element);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(404).json(error);
       });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(404).json(error);
-    });
-});
+  });
+};
