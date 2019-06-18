@@ -18,8 +18,26 @@ let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScrapper"
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-app.get("/", (request, response) => {
+app.get("/", (req, res) => {
   response.send("Hello Wold");
+});
+
+app.get("/scrape", (req, res) => {
+  axios
+    .get("https://www.nytimes.com/")
+    .then(results => {
+      // console.log(results.data);
+      // res.send(results.data);
+      let $ = cheerio.load(results.data);
+
+      $("article").each((i, element) => {
+        console.log(element);
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(404).json(error);
+    });
 });
 
 app.listen(PORT, () => {
