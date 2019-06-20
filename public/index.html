@@ -26,6 +26,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="./css/style.css" type="text/css" />
+    <script src="./js/app.js"></script>
     <title>Mongoose Scrapper</title>
   </head>
   <body>
@@ -40,7 +41,7 @@
                   <a class="nav-link text-light" href="#savedArticles">Saved Articles</a>
                 </li>
                 <li class="nav-item">
-                  <a class="btn btn-danger" href="#ScrapeArticles">Scrape Articles</a>
+                  <button class="btn btn-danger" id="scrapeArticles">Scrape Articles</button>
                 </li>
               </ul>
             </div>
@@ -51,6 +52,9 @@
         <div class="column col-12 d-flex justify-content-center align-items-center">
           <p class="headline">News Scrapper</p>
         </div>
+      </div>
+      <div class="row">
+        <div class="column col-12" id="news-articles"></div>
       </div>
     </div>
   </body>

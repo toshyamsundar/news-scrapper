@@ -8,6 +8,7 @@ module.exports = app => {
   });
 
   app.get("/scrape", (req, res) => {
+    let articles = [];
     axios
       .get("http://www.echojs.com/")
       .then(results => {
@@ -22,14 +23,23 @@ module.exports = app => {
             .children("a")
             .attr("href");
 
+          articles.push(article);
           db.Article.create(article)
             .then(dbArticle => {
-              res.json(dbArticle);
+              console.log(dbArticle);
             })
             .catch(error => {
-              res.json(error);
+              console.log(error);
             });
         });
+
+        db.Article.find({})
+          .then(dbArticle => {
+            res.json(dbArticle);
+          })
+          .catch(error => {
+            res.json(error);
+          });
       })
       .catch(error => {
         console.log(error);
