@@ -1,4 +1,6 @@
+let axios = require("axios");
 let db = require("../models");
+let cheerio = require("cheerio");
 
 module.exports = app => {
   app.get("/", (req, res) => {
@@ -7,14 +9,20 @@ module.exports = app => {
 
   app.get("/scrape", (req, res) => {
     axios
-      .get("https://www.nytimes.com/")
+      .get("http://www.echojs.com/")
       .then(results => {
-        // console.log(results.data);
-        // res.send(results.data);
         let $ = cheerio.load(results.data);
 
-        $("article").each((i, element) => {
-          console.log(element);
+        $("article h2").each((i, element) => {
+          let title = $(element)
+            .children("a")
+            .text();
+          let link = $(element)
+            .children("a")
+            .attr("href");
+
+          console.log(`link: ${link}`);
+          console.log(`title: ${title}`);
         });
       })
       .catch(error => {

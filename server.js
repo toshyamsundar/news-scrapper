@@ -1,6 +1,4 @@
 let express = require("express");
-let cheerio = require("cheerio");
-let axios = require("axios");
 let mongoose = require("mongoose");
 let db = require("./models");
 
