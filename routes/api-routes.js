@@ -13,16 +13,22 @@ module.exports = app => {
       .then(results => {
         let $ = cheerio.load(results.data);
 
+        let article = {};
         $("article h2").each((i, element) => {
-          let title = $(element)
+          article.headline = $(element)
             .children("a")
             .text();
-          let link = $(element)
+          article.url = $(element)
             .children("a")
             .attr("href");
 
-          console.log(`link: ${link}`);
-          console.log(`title: ${title}`);
+          db.Article.create(article)
+            .then(dbArticle => {
+              res.json(dbArticle);
+            })
+            .catch(error => {
+              res.json(error);
+            });
         });
       })
       .catch(error => {
