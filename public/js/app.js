@@ -22,7 +22,7 @@ let renderArticles = data => {
       .attr("target", "_blank")
       .text(article.headline);
     let btnElem = $("<button>")
-      .addClass("btn btn-success")
+      .addClass("btn btn-success save-article")
       .text("Save");
 
     $(h4Elem).append(aTag);
@@ -31,3 +31,17 @@ let renderArticles = data => {
     $("#news-articles").append(divCard);
   });
 };
+
+$(document).on("click", ".save-article", function(event) {
+  event.preventDefault();
+
+  let articleId = $(this)
+    .parents(".card")
+    .attr("data-id");
+
+  $.post("/api/saveArticle/" + articleId).then(results => {
+    $(this)
+      .text("Saved")
+      .addClass("btn-danger");
+  });
+});
