@@ -14,35 +14,26 @@ module.exports = app => {
       .then(results => {
         let $ = cheerio.load(results.data);
 
-        let article = {};
         $("article h2").each((i, element) => {
-          article.headline = $(element)
+          let headline = $(element)
             .children("a")
             .text();
-          article.url = $(element)
+          let url = $(element)
             .children("a")
             .attr("href");
 
-          articles.push(article);
-          db.Article.create(article)
-            .then(dbArticle => {
-              console.log(dbArticle);
-            })
-            .catch(error => {
-              console.log(error);
-            });
+          articles.push({ headline, url });
         });
 
-        db.Article.find({})
-          .then(dbArticle => {
-            res.json(dbArticle);
+        db.Article.create(articles)
+          .then(dbArticles => {
+            res.status(200).json({ dbArticles });
           })
           .catch(error => {
-            res.json(error);
+            res.status(500).json(error);
           });
       })
       .catch(error => {
-        console.log(error);
         res.status(404).json(error);
       });
   });
