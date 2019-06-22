@@ -33,4 +33,14 @@ module.exports = app => {
         res.status(404).json(error);
       });
   });
+
+  app.post("/api/saveArticle/:articleId", (req, res) => {
+    db.Article.findByIdAndUpdate({ _id: req.params.articleId }, { saved: true })
+      .then(dbArticle => {
+        res.status(200).json(dbArticle);
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  });
 };
