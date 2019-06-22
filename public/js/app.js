@@ -1,5 +1,5 @@
 $(document).on("click", "#scrapeArticles", event => {
-  $.get("/scrape")
+  $.get("/api/scrape")
     .then(results => {
       console.log(results.dbArticles[0]);
       renderArticles(results);

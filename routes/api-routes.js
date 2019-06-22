@@ -3,11 +3,7 @@ let db = require("../models");
 let cheerio = require("cheerio");
 
 module.exports = app => {
-  app.get("/", (req, res) => {
-    response.send("Hello Wold");
-  });
-
-  app.get("/scrape", (req, res) => {
+  app.get("/api/scrape", (req, res) => {
     let articles = [];
     axios
       .get("http://www.echojs.com/")
