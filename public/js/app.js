@@ -12,7 +12,9 @@ $(document).on("click", "#scrapeArticles", event => {
 let renderArticles = data => {
   $("#news-articles").empty();
   data.dbArticles.forEach(article => {
-    let divCard = $("<div>").addClass("card my-1 bg-light");
+    let divCard = $("<div>")
+      .addClass("card my-1 bg-light")
+      .attr("data-id", article._id);
     let divCardBody = $("<div>").addClass("card-body d-flex justify-content-between");
     let h4Elem = $("<h4>");
     let aTag = $("<a>")
