@@ -21,9 +21,15 @@ module.exports = app => {
           articles.push({ headline, url });
         });
 
-        db.Article.create(articles)
-          .then(dbArticles => {
-            res.status(200).json({ dbArticles });
+        db.Article.deleteMany({})
+          .then(deleteArticles => {
+            db.Article.create(articles)
+              .then(dbArticles => {
+                res.status(200).json({ dbArticles });
+              })
+              .catch(error => {
+                res.status(500).json(error);
+              });
           })
           .catch(error => {
             res.status(500).json(error);
