@@ -49,4 +49,14 @@ module.exports = app => {
         res.status(500).json(error);
       });
   });
+
+  app.get("/api/getSavedArticles", (req, res) => {
+    db.Article.find({ saved: true })
+      .then(dbArticles => {
+        res.status(200).json(dbArticles);
+      })
+      .catch(error => {
+        res.status(404).json(error);
+      });
+  });
 };
