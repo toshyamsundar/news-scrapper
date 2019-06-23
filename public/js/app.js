@@ -1,7 +1,7 @@
 $(document).on("click", "#scrapeArticles", event => {
   $.get("/api/scrape")
     .then(results => {
-      console.log(results.dbArticles[0]);
+      console.log(results);
       renderScrapedArticles(results);
     })
     .catch(error => {
@@ -51,7 +51,8 @@ $(document).on("click", "#savedArticles", function(event) {
 
   $.get("/api/getSavedArticles")
     .then(results => {
-      console.log(results.dbArticles[0]);
+      console.log(results);
+      // window.location.replace("../saved.html");
       renderSavedArticles(results);
     })
     .catch(error => {
@@ -60,7 +61,8 @@ $(document).on("click", "#savedArticles", function(event) {
 });
 
 let renderSavedArticles = data => {
-  data.dbArticles.forEach(article => {
+  data.forEach(article => {
+    console.log(article);
     let divCard = $("<div>")
       .addClass("card my-1 bg-light")
       .attr("data-id", article._id);
