@@ -51,8 +51,6 @@ $(document).on("click", "#savedArticles", function(event) {
 
   $.get("/api/getSavedArticles")
     .then(results => {
-      // console.log(results);
-      // window.location.replace("../saved.html");
       renderSavedArticles(results);
     })
     .catch(error => {
@@ -62,7 +60,8 @@ $(document).on("click", "#savedArticles", function(event) {
 
 let renderSavedArticles = data => {
   data.forEach(article => {
-    // console.log(article);
+    $("#news-articles").hide();
+    $("#saved-articles").show();
     let divCard = $("<div>")
       .addClass("card my-1 bg-light")
       .attr("data-id", article._id);
@@ -74,7 +73,7 @@ let renderSavedArticles = data => {
       .text(article.headline);
     let btnElem = $("<button>")
       .addClass("btn btn-success save-article")
-      .text("Save");
+      .text("Add Note");
 
     $(h4Elem).append(aTag);
     $(divCardBody).append(h4Elem, btnElem);
