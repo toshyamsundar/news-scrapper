@@ -20,3 +20,14 @@
   letter-spacing: 0.2rem;
   text-shadow: 1px 1px 1px rgb(241, 236, 236);
 }
+
+.btn-modal {
+  color: white;
+  background-color: #17b847 !important;
+  box-shadow: 1px 1px 1px #000;
+  border-radius: 0;
+}
+
+.btn-modal:hover {
+  box-shadow: none;
+}

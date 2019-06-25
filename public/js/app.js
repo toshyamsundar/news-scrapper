@@ -1,14 +1,3 @@
-$(document).on("click", "#scrapeArticles", event => {
-  $.get("/api/scrape")
-    .then(results => {
-      // console.log(results);
-      renderScrapedArticles(results);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-});
-
 let renderScrapedArticles = data => {
   $("#news-articles").empty();
   data.dbArticles.forEach(article => {
@@ -31,6 +20,40 @@ let renderScrapedArticles = data => {
     $("#news-articles").append(divCard);
   });
 };
+
+let renderSavedArticles = data => {
+  data.forEach(article => {
+    $("#news-articles").hide();
+    $("#saved-articles").show();
+    let divCard = $("<div>")
+      .addClass("card my-1 bg-light")
+      .attr("data-id", article._id);
+    let divCardBody = $("<div>").addClass("card-body d-flex justify-content-between");
+    let h4Elem = $("<h4>");
+    let aTag = $("<a>")
+      .attr("href", article.url)
+      .attr("target", "_blank")
+      .text(article.headline);
+    let btnElem = $("<button>")
+      .addClass("btn btn-success add-note")
+      .text("Add Note");
+
+    $(h4Elem).append(aTag);
+    $(divCardBody).append(h4Elem, btnElem);
+    $(divCard).append(divCardBody);
+    $("#saved-articles").append(divCard);
+  });
+};
+
+$(document).on("click", "#scrapeArticles", event => {
+  $.get("/api/scrape")
+    .then(results => {
+      renderScrapedArticles(results);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
 
 $(document).on("click", ".save-article", function(event) {
   event.preventDefault();
@@ -64,26 +87,6 @@ $(document).on("click", "#home", function(event) {
   $("#saved-articles").hide();
 });
 
-let renderSavedArticles = data => {
-  data.forEach(article => {
-    $("#news-articles").hide();
-    $("#saved-articles").show();
-    let divCard = $("<div>")
-      .addClass("card my-1 bg-light")
-      .attr("data-id", article._id);
-    let divCardBody = $("<div>").addClass("card-body d-flex justify-content-between");
-    let h4Elem = $("<h4>");
-    let aTag = $("<a>")
-      .attr("href", article.url)
-      .attr("target", "_blank")
-      .text(article.headline);
-    let btnElem = $("<button>")
-      .addClass("btn btn-success save-article")
-      .text("Add Note");
-
-    $(h4Elem).append(aTag);
-    $(divCardBody).append(h4Elem, btnElem);
-    $(divCard).append(divCardBody);
-    $("#saved-articles").append(divCard);
-  });
-};
+$(document).on("click", ".add-note", function(event) {
+  $("#modal-note").modal("show");
+});
