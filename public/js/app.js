@@ -48,6 +48,7 @@ $(document).on("click", ".save-article", function(event) {
 
 $(document).on("click", "#savedArticles", function(event) {
   event.preventDefault();
+  $("#saved-articles").empty();
 
   $.get("/api/getSavedArticles")
     .then(results => {
@@ -56,6 +57,11 @@ $(document).on("click", "#savedArticles", function(event) {
     .catch(error => {
       console.log(error);
     });
+});
+
+$(document).on("click", "#home", function(event) {
+  $("#news-articles").show();
+  $("#saved-articles").hide();
 });
 
 let renderSavedArticles = data => {
